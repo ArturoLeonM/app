@@ -1,0 +1,35 @@
+<%= form_with(model: producto) do |form| %>
+  <% if producto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(producto.errors.count, "error") %> este porducto no se puede guardar:</h2>
+
+      <ul>
+        <% producto.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_field :descripcion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :precio %>
+    <%= form.text_field :precio %>
+  </div>
+
+  <%= form.collection_select :tipo_id, Tipo.all, :id, :tipo %>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

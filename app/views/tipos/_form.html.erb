@@ -1,0 +1,27 @@
+<%= form_with(model: tipo) do |form| %>
+  <% if tipo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tipo.errors.count, "error") %> este tipo porducto no se puede guardar:</h2>
+
+      <ul>
+        <% tipo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :tipo %>
+    <%= form.text_field :tipo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_field :descripcion %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

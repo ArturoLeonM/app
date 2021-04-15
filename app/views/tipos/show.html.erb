@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>tipo:</strong>
+  <%= @tipos.tipo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @tipos.descripcion %>
+</p>
+
+
+<%= link_to 'Editar', edit_tipo_path(@tipos) %> |
+<%= link_to 'Atras', tipos_path %>
