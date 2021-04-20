@@ -1,4 +1,4 @@
-require 'csv'
+require './app/reportes/productos_csv.rb'
 class ProductosController < ApplicationController
   before_action :set_producto, only: %i[ show edit update destroy ]
   # respond_to :html, :json, :csv 
@@ -52,7 +52,11 @@ class ProductosController < ApplicationController
     end
   end  
 
-  # def impr
+  
+  def impr
+    send_data ProductoReporte.new.call,
+    :type => 'text/csv; charset=iso-8859-1; header=present', 
+    :disposition=>'attachment; filename=iprm.csv'
   #   @csv_string = CSV.generate do |csv|
   #     csv << ["id", "nombre", "descripcion", "precio", "tipo"]
   #     Producto.all.each do |i|
@@ -67,7 +71,7 @@ class ProductosController < ApplicationController
   #   send_data @csv_string,
   #   :type => 'text/csv; charset=iso-8859-1; header=present', 
   #   :disposition=>'attachment; filename=iprm.csv'
-  # end 
+  end 
 
   private
   
