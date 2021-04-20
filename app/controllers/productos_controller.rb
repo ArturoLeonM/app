@@ -1,3 +1,4 @@
+require 'csv'
 class ProductosController < ApplicationController
   before_action :set_producto, only: %i[ show edit update destroy ]
   # respond_to :html, :json, :csv 
@@ -51,13 +52,22 @@ class ProductosController < ApplicationController
     end
   end  
 
-  def export_csv 
-    producto = Contacts.find_by_sql('select * from productos limit 10') 
-    respond_to do |format| 
-      format.html 
-      format.csv { send_data @producto.as_csv } 
-    end 
-  end 
+  # def impr
+  #   @csv_string = CSV.generate do |csv|
+  #     csv << ["id", "nombre", "descripcion", "precio", "tipo"]
+  #     Producto.all.each do |i|
+  #       csv << [i.id,
+  #       i.name,
+  #       i.descripcion,
+  #       i.precio,
+  #       i.tipo]
+  #     end
+  #     csv 
+  #   end
+  #   send_data @csv_string,
+  #   :type => 'text/csv; charset=iso-8859-1; header=present', 
+  #   :disposition=>'attachment; filename=iprm.csv'
+  # end 
 
   private
   
