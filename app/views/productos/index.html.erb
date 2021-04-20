@@ -5,6 +5,8 @@
 <%= link_to 'nuevo tipo de producto', tipos_path %>
 <br></br>
 <%= link_to 'nuevo producto', new_producto_path %>
+<br></br>
+
 
 <table>
   <thead>
@@ -20,10 +22,10 @@
   <tbody>
     <% @productos.each do |producto| %>
       <tr>
-        <td><%= producto[:name] %></td>
-        <td><%= producto[:descripcion] %></td>
-        <td><%= producto[:precio] %></td>
-        <td><%= producto[:tipo] %></td>
+        <td><%= producto.name %></td>
+        <td><%= producto.descripcion %></td>
+        <td><%= producto.precio %></td>
+        <td><%= producto.tipo.tipo%></td>
         <td><%= link_to 'Mostrar', producto %></td>
         <td><%= link_to 'Editar', edit_producto_path(producto) %></td>
         <td><%= link_to 'Borrar', producto, method: :delete, data: { confirm: 'estas seguro?' } %></td>

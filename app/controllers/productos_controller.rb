@@ -1,15 +1,9 @@
 class ProductosController < ApplicationController
   before_action :set_producto, only: %i[ show edit update destroy ]
+  # respond_to :html, :json, :csv 
 
   def index
-    @productos = []
-    Producto.all.each do |i|
-      @productos.push({:id => i.id, :name => i.name, :descripcion => i.descripcion, :precio => i.precio, :tipo_id => i.tipo_id, :tipo => i&.tipo&.tipo})
-    end
-    p @productos
-    # @productos1 = productos1.new {}
-    #   productos1 = {name:coca cola descripcion:bebida gasificada precio:15 tipo_id:8 }
-    #     puts productos1  {:name, :descripcion : }
+    @productos = Producto.all
 
   end
 
@@ -55,15 +49,23 @@ class ProductosController < ApplicationController
       format.html { redirect_to productos_url, notice: "El producto fue eliminado con éxito." }
       format.json { head :no_content }
     end
-  end
+  end  
+
+  def export_csv 
+    producto = Contacts.find_by_sql('select * from productos limit 10') 
+    respond_to do |format| 
+      format.html 
+      format.csv { send_data @producto.as_csv } 
+    end 
+  end 
 
   private
   
-    def set_producto
-      @producto = Producto.find(params[:id])
-    end
+  def set_producto
+    @producto = Producto.find(params[:id])
+  end
 
-    def producto_params
-      params.require(:producto).permit(:name, :descripcion, :precio, :tipo_id )
-    end
+  def producto_params
+    params.require(:producto).permit(:name, :descripcion, :precio, :tipo_id )
+  end
 end
