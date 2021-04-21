@@ -1,10 +1,12 @@
 require './app/reportes/productos_csv.rb'
+require './app/reportes/productos_pdf.rb'
 class ProductosController < ApplicationController
   before_action :set_producto, only: %i[ show edit update destroy ]
   # respond_to :html, :json, :csv 
 
   def index
     @productos = Producto.all
+
 
   end
 
@@ -54,24 +56,15 @@ class ProductosController < ApplicationController
 
   
   def impr
-    send_data ProductoReporte.new.call,
+    send_data ProductosReporte.new.call,
     :type => 'text/csv; charset=iso-8859-1; header=present', 
     :disposition=>'attachment; filename=iprm.csv'
-  #   @csv_string = CSV.generate do |csv|
-  #     csv << ["id", "nombre", "descripcion", "precio", "tipo"]
-  #     Producto.all.each do |i|
-  #       csv << [i.id,
-  #       i.name,
-  #       i.descripcion,
-  #       i.precio,
-  #       i.tipo]
-  #     end
-  #     csv 
-  #   end
-  #   send_data @csv_string,
-  #   :type => 'text/csv; charset=iso-8859-1; header=present', 
-  #   :disposition=>'attachment; filename=iprm.csv'
   end 
+
+  def imprpdf
+    pdf = ProductosPdf.new.call
+    send_data pdf.render, :type => 'application/pdf', :disposition => 'inline', :filename => 'test.pdf'
+  end
 
   private
   
@@ -82,4 +75,6 @@ class ProductosController < ApplicationController
   def producto_params
     params.require(:producto).permit(:name, :descripcion, :precio, :tipo_id )
   end
+
+
 end
