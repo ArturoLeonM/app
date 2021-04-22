@@ -9,7 +9,7 @@ class ProductoReporte
                 i.name,
                 i.descripcion,
                 i.precio,
-                i.tipo]
+                i.tipo.tipo]
             end
             csv 
         end

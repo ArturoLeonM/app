@@ -56,7 +56,7 @@ class ProductosController < ApplicationController
 
   
   def impr
-    send_data ProductosReporte.new.call,
+    send_data ProductoReporte.new.call,
     :type => 'text/csv; charset=iso-8859-1; header=present', 
     :disposition=>'attachment; filename=iprm.csv'
   end 

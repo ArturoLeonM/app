@@ -1,24 +1,27 @@
-# z
-
 class ProductosPdf
 
   def call
-    # pdf = Prawn::Document.new
-    # # pdf.text "HolaMundo"
-    # pdf
-    pdf = Prawn::Document.new( 
-      page_size:'EXECUTIVE',  
-      page_layout: :landscape
-    ) do  
-      text 'EXECUTIVE landscape page.'  
-      custom_size =[275, 326]
-      ['A4','TABLOID','B7', custom_size].each do |size|
-        start_new_page(size: size, layout: :portrait)    
-        text "#{size} portrait page."    
-        start_new_page(size: size, layout: :landscape)    
-        text "#{size} landscape page."  
+
+
+    Prawn::Document.new( 
+      page_size:'EXECUTIVE' 
+      
+      )do
+        repeat :all do
+
+        bounding_box [bounds.left, bounds.top], :width  => bounds.width do
+          font "Helvetica"
+          text "Here's My Fancy Header", :align => :center, :size => 25
+          stroke_horizontal_rule
+        end
+        
+        bounding_box [bounds.left, bounds.bottom + 28], :width  => bounds.width do
+          font "Helvetica"
+          stroke_horizontal_rule
+          move_down(5)
+          text "Este es un sexy footer", :size => 16
+        end
       end
     end
-    pdf
   end
 end
