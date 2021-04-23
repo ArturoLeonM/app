@@ -22,14 +22,6 @@ class ProductosPdf
       move_down 15
 
       Producto.all.each do |i|
-        # i.id,
-        # i.name,
-        # i.descripcion,
-        # i.precio,
-        # i.tipo.tipo
-
-
-        
         text_box i.id.to_s, at: [15,cursor]
         text_box i.name, at: [35,cursor]
         text = text_box i.descripcion, at: [155,cursor], width: 150, height: 15,  overflow: :truncate
@@ -40,7 +32,6 @@ class ProductosPdf
           text = text_box text, at: [155,cursor], width: 150, height: 15, overflow: :truncate
           move_down 15
         end
-
       end
     end
   end
